@@ -13,3 +13,12 @@ libraryDependencies ++= Seq(
 )
 
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.+" % "test"
+
+publishTo := {
+	val prefix = if (isSnapshot.value)
+		"snapshots"
+	else
+		"releases"
+
+	Some("Website" at "s3://" + prefix + ".ivy.brindescu.com")
+}
