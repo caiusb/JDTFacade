@@ -2,7 +2,7 @@ package com.brindescu.jdtfacade
 
 import org.eclipse.jdt.core.dom.{AST, ASTParser, CompilationUnit}
 
-import scala.io.{BufferedSource, Source}
+import scala.io.Source
 
 object Parser {
 
@@ -10,7 +10,7 @@ object Parser {
 		val parser = ASTParser.newParser(AST.JLS8)
 		parser.setKind(ASTParser.K_COMPILATION_UNIT)
 		val file	 = Source.fromFile(filePath)
-		parser.setSource(try file.getLines.mkString.toCharArray finally file.close)
+		parser.setSource(try file.getLines.mkString("\n").toCharArray finally file.close)
 		parser.createAST(null).asInstanceOf[CompilationUnit]
 	}
 
