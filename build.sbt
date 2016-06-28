@@ -6,7 +6,7 @@ organization := "com.brindescu"
 
 version := "0.1"
 
-scalaVersion := "2.11.8"
+crossScalaVersions := Seq("2.10.6", "2.11.8")
 
 libraryDependencies ++= Seq(
 	"org.eclipse.jdt" % "org.eclipse.jdt.core" % "3.10.0"
