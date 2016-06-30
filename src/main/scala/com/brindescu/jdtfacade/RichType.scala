@@ -12,6 +12,7 @@ class RichType(private val t: Type) {
 			case x: ArrayType => "[" + x.getElementType.getTypeDescription
 			case x: SimpleType => getObjectCode(x)
 			case x: QualifiedType => getObjectCode(x)
+			case _ => ""
 		}
 
 	private def getObjectCode(t: SimpleType): String =
