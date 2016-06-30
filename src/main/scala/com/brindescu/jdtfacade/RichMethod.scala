@@ -12,11 +12,28 @@ class RichMethod(private val node: MethodDeclaration) {
 	def getParameters(): List[SingleVariableDeclaration] =
 		node.getStructuralProperty(MethodDeclaration.PARAMETERS_PROPERTY).asInstanceOf[java.util.List[SingleVariableDeclaration]].toList
 
+	def getActualReturnType(): String =
+		if (!node.isConstructor)
+			return node.getReturnType2.getTypeDescription
+		else
+			return "V"//"L" + node.getDeclaringClass.resolveBinding.getBinaryName.replace(".","/") + ";"
 
-	def getDescriptor(): String =
-		node.getName.getIdentifier + "(" + getParameters.map { _.getType }
+	def getDeclaringClass(): TypeDeclaration = {
+		def find(n: ASTNode): TypeDeclaration =
+			n match {
+				case t: TypeDeclaration => t
+				case n: ASTNode => find(n.getParent)
+			}
+
+		find(node)
+	}
+
+	def getDescriptor(): String = {
+		val methodIdentifier: String = if (node.isConstructor) "<init>" else node.getName.getIdentifier
+		methodIdentifier + "(" + getParameters.map { _.getType }
 			.map { _.getTypeDescription }
-			.mkString + ")" + node.getReturnType2.getTypeDescription
+			.mkString + ")" + getActualReturnType
+	}
 
 	def getModifierKeywords: List[Modifier.ModifierKeyword] =
 		node.getStructuralProperty(MethodDeclaration.MODIFIERS2_PROPERTY).asInstanceOf[java.util.List[Modifier]]
