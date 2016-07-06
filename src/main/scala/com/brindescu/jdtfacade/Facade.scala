@@ -9,4 +9,5 @@ object Facade {
 	implicit def wrapMethod(m: MethodDeclaration) = RichMethod(m)
 	implicit def wrapType(t: Type) = RichType(t)
 	implicit def wrapPrimitiveType(t: PrimitiveType) = RichPrimitiveType(t)
+	implicit def wrapNode(n: ASTNode) = RichNode(n)
 }
