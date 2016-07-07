@@ -1,7 +1,7 @@
 package com.brindescu.jdtfacade
 
 import org.eclipse.jdt.core.dom.PrimitiveType
-import PrimitiveType._
+import org.eclipse.jdt.core.dom.PrimitiveType._
 
 class RichPrimitiveType(private val t: PrimitiveType) {
 

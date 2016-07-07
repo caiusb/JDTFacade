@@ -1,7 +1,7 @@
 package com.brindescu.jdtfacade
 
+import com.brindescu.jdtfacade.Facade._
 import org.eclipse.jdt.core.dom.{ASTNode, AnonymousClassDeclaration, MethodDeclaration, TypeDeclaration}
-import Facade._
 
 class RichNode(private val node: ASTNode) {
 

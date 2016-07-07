@@ -1,8 +1,7 @@
 package com.brindescu.jdtfacade
 
+import com.brindescu.jdtfacade.Facade._
 import org.eclipse.jdt.core.dom._
-
-import Facade._
 
 class RichType(private val t: Type) {
 
