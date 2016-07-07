@@ -11,11 +11,12 @@ class RichType(private val t: Type) {
 			case x: ArrayType => "[" + x.getElementType.getTypeDescription
 			case x: SimpleType => getObjectCode(x)
 			case x: QualifiedType => getObjectCode(x)
+			case x: ParameterizedType => x.getBaseType.getTypeDescription
 			case _ => ""
 		}
 
 	private def getObjectCode(t: SimpleType): String =
-		"L" + t.getName.resolveBinding.asInstanceOf[ITypeBinding].getQualifiedName.replace('.','/') + ";"
+		"L" + t.getName.resolveBinding.asInstanceOf[ITypeBinding].getErasure.getQualifiedName.replace('.','/') + ";"
 
 	private def getObjectCode(t: QualifiedType): String =
 		"L" + t.getName.getFullyQualifiedName.replace('.','/') + ";"
