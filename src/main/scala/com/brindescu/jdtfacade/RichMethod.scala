@@ -20,9 +20,9 @@ class RichMethod(private val node: MethodDeclaration) {
 
 	def getDeclaringClass(): TypeDeclaration = {
 		def find(n: ASTNode): TypeDeclaration =
-			n match {
-				case t: TypeDeclaration => t
-				case n: ASTNode => find(n.getParent)
+				n match {
+					case t: TypeDeclaration => t
+					case n: ASTNode => find(n.getParent)
 			}
 
 		find(node)
