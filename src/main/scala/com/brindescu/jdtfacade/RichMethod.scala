@@ -23,7 +23,7 @@ class RichMethod(private val node: MethodDeclaration) {
 				n match {
 					case t: TypeDeclaration => t
 					case n: ASTNode => find(n.getParent)
-			}
+				}
 
 		find(node)
 	}
