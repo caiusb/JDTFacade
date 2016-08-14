@@ -5,10 +5,10 @@ import org.eclipse.jdt.core.dom.{ASTNode, AnonymousClassDeclaration, MethodDecla
 
 class RichNode(private val node: ASTNode) {
 
-	def getDeclaringMethod(): MethodDeclaration =
+	def getDeclaringMethod(): Option[MethodDeclaration] =
 		node match {
-			case m: MethodDeclaration => m
-			case null => null
+			case m: MethodDeclaration => Some(m)
+			case null => None
 			case n: ASTNode => n.getParent.getDeclaringMethod
 		}
 
