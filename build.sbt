@@ -4,7 +4,7 @@ name := "JDTFacade"
 
 organization := "com.brindescu"
 
-version := "0.5"
+version := "0.6-SNAPSHOT"
 
 crossScalaVersions := Seq("2.10.6", "2.11.8")
 
