@@ -1,7 +1,9 @@
 package com.brindescu.jdtfacade
 
 import com.brindescu.jdtfacade.Facade._
-import org.eclipse.jdt.core.dom.{ASTNode, AnonymousClassDeclaration, MethodDeclaration, TypeDeclaration}
+import org.eclipse.jdt.core.dom._
+
+import scala.collection.JavaConversions._
 
 class RichNode(private val node: ASTNode) {
 
@@ -19,6 +21,17 @@ class RichNode(private val node: ASTNode) {
 			case null => null
 			case n: ASTNode => n.getParent.getDeclaringClass
 		}
+
+	def getChildren(): List[ASTNode] = {
+		node.structuralPropertiesForType().map{_ match {
+			case c: ChildPropertyDescriptor => node.getStructuralProperty(c).asInstanceOf[ASTNode] match {
+				case p if p!=null => List(p)
+				case _ => List()
+			}
+			case l: ChildListPropertyDescriptor => node.getStructuralProperty(l).asInstanceOf[java.util.List[Any]].map { _.asInstanceOf[ASTNode] }
+			case _ => List()
+		}}.flatten.toList
+	}
 }
 
 object RichNode {
