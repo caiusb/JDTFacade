@@ -7,12 +7,16 @@ import scala.io.Source
 
 object Parser {
 
-	def parse(filePath: String): CompilationUnit = {
+	def parse(contents: Array[Char]): CompilationUnit = {
 		val parser = ASTParser.newParser(AST.JLS8)
 		parser.setKind(ASTParser.K_COMPILATION_UNIT)
-		val file	 = Source.fromFile(filePath)
-		parser.setSource(try file.getLines.mkString("\n").toCharArray finally file.close)
+		parser.setSource(contents)
 		parser.createAST(null).asInstanceOf[CompilationUnit]
+	}
+
+	def parse(filePath: String): CompilationUnit = {
+		val file = Source.fromFile(filePath)
+		parse(try file.getLines.mkString("\n").toCharArray finally file.close)
 	}
 
 	def parse(files: List[String], sources: List[String], jarDeps: List[String]): Map[String, CompilationUnit] = {
