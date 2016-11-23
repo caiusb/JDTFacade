@@ -6,13 +6,15 @@ organization := "com.brindescu"
 
 version := "0.8"
 
-crossScalaVersions := Seq("2.10.6", "2.11.8")
+scalaVersion := "2.12.0"
+
+crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0")
 
 libraryDependencies ++= Seq(
 	"org.eclipse.jdt" % "org.eclipse.jdt.core" % "3.10.0"
 )
 
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.+" % "test"
+libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.+" % "test"
 
 publishTo := {
 	val prefix = if (isSnapshot.value)
