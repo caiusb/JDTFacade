@@ -32,6 +32,9 @@ class RichNode(private val node: ASTNode) {
 			case _ => List()
 		}}.flatten.toList
 	}
+
+	def getLineNumber(): Int =
+		node.getRoot.asInstanceOf[CompilationUnit].getLineNumber(node.getStartPosition)
 }
 
 object RichNode {
