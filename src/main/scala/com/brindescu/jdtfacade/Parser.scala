@@ -1,6 +1,6 @@
 package com.brindescu.jdtfacade
 
-import org.eclipse.jdt.core.dom.{AST, ASTParser, CompilationUnit, FileASTRequestor}
+import org.eclipse.jdt.core.dom._
 
 import scala.collection.mutable
 import scala.io.Source
@@ -36,6 +36,13 @@ object Parser {
 		parser.createASTs(files.toArray, null, Seq[String]().toArray, requestor, null)
 
 		return asts.toMap
+	}
+
+	def parseStatements(statements: String): Block = {
+		val parser = ASTParser.newParser(AST.JLS8)
+		parser.setKind(ASTParser.K_STATEMENTS)
+		parser.setSource(statements.toCharArray)
+		parser.createAST(null).asInstanceOf[Block]
 	}
 
 }
