@@ -5,7 +5,7 @@ import org.eclipse.jdt.core.dom._
 
 import scala.collection.JavaConversions._
 
-class RichMethod(private val node: MethodDeclaration) {
+class RichMethod(node: MethodDeclaration) extends RichNode(node) {
 
 	def getMethodName = node.getName.getIdentifier
 
@@ -18,15 +18,6 @@ class RichMethod(private val node: MethodDeclaration) {
 		else
 			return "V"//"L" + node.getDeclaringClass.resolveBinding.getBinaryName.replace(".","/") + ";"
 
-	def getDeclaringClass(): TypeDeclaration = {
-		def find(n: ASTNode): TypeDeclaration =
-				n match {
-					case t: TypeDeclaration => t
-					case n: ASTNode => find(n.getParent)
-				}
-
-		find(node)
-	}
 
 	def getDescriptor(): String = {
 		val methodIdentifier: String = if (node.isConstructor) "<init>" else node.getName.getIdentifier
