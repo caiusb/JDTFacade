@@ -33,8 +33,13 @@ class RichNode(protected[jdtfacade] val node: ASTNode) {
 		}}.flatten.toList
 	}
 
-	def getLineNumber(): Int =
+	def getStartLineNumber(): Int =
 		node.getRoot.asInstanceOf[CompilationUnit].getLineNumber(node.getStartPosition)
+
+	def getEndLineNumber(): Int =
+		node.getRoot.asInstanceOf[CompilationUnit].getLineNumber(node.getStartPosition + node.getLength - 1)
+
+	def getLineRange(): Range = Range(getStartLineNumber, getEndLineNumber).inclusive
 }
 
 object RichNode {
