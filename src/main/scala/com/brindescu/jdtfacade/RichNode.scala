@@ -14,11 +14,11 @@ class RichNode(private val node: ASTNode) {
 			case n: ASTNode => n.getParent.getDeclaringMethod
 		}
 
-	def getDeclaringClass(): TypeDeclaration =
+	def getDeclaringClass(): Option[TypeDeclaration] =
 		node match {
-			case t: TypeDeclaration => t
-			case a: AnonymousClassDeclaration => null //TODO: deal with this
-			case null => null
+			case t: TypeDeclaration => Some(t)
+			case a: AnonymousClassDeclaration => None //TODO: deal with this
+			case null => None
 			case n: ASTNode => n.getParent.getDeclaringClass
 		}
 
