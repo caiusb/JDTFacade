@@ -5,8 +5,13 @@ import org.eclipse.jdt.core.dom.TypeDeclaration
 
 class RichClass(private val node: TypeDeclaration) {
 
-	def getFullyQualifiedName(): String =
-		node.resolveBinding.getQualifiedName
+	def getFullyQualifiedName(): String = {
+		val binding = node.resolveBinding
+		if (binding != null)
+			binding.getQualifiedName
+		else
+			node.getName.getIdentifier
+	}
 
 	def getDescriptor(): String =
 		if(isInnerTypeDeclaration)
