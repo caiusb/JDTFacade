@@ -4,7 +4,7 @@ name := "JDTFacade"
 
 organization := "com.brindescu"
 
-version := "0.9.2"
+version := "0.10.0"
 
 scalaVersion := "2.12.0"
 
