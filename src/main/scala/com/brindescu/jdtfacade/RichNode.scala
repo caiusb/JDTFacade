@@ -5,7 +5,7 @@ import org.eclipse.jdt.core.dom._
 
 import scala.collection.JavaConversions._
 
-class RichNode(private val node: ASTNode) {
+class RichNode(protected[jdtfacade] val node: ASTNode) {
 
 	def getDeclaringMethod(): Option[MethodDeclaration] =
 		node match {
